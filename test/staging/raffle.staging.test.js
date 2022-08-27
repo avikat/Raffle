@@ -24,7 +24,7 @@ developmentChains.includes(network.name)
                   await new Promise(async (resolve, reject) => {
                       // setup listener before we enter the raffle
                       // Just in case the blockchain moves REALLY fast
-                      raffle.once("WinnerPicked", async () => {
+                      raffle.once("WinerPicked", async () => {
                           console.log("WinnerPicked event fired!")
                           try {
                               // add our asserts here

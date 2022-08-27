@@ -121,19 +121,48 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat-confi
 
         //   describe("fulfillRandomWords", async function () {
         //       beforeEach(async function () {
-        //           await raffle.enterRAffle({ value: raffleEntranceFee })
+        //           await raffle.enterRaffle({ value: raffleEntranceFee })
         //           await network.provider.send("evm_increaseTime", [interval.toNumber() + 1])
         //           await network.provider.request({ method: "evm_mine", params: [] })
-        //           it("can only be called after perform performUpkeep", async function () {
-        //               await expect(
-        //                   vrfCoordinatorV2Mock.fulfillRandomWords(0, raffle.address)
-        //               ).to.be.revertedWith("nonexistence request")
-        //               await expect(
-        //                   vrfCoordinatorV2Mock.fulfillRandomWords(1, raffle.address)
-        //               ).to.be.revertedWith("nonexistence request")
-        //           })
         //       })
-        //   })
+        //       it("can only be called after performupkeep", async () => {
+        //                 await expect(
+        //                     vrfCoordinatorV2Mock.fulfillRandomWords(0, raffle.address) // reverts if not fulfilled
+        //                 ).to.be.revertedWith("nonexistent request")
+        //                 await expect(
+        //                     vrfCoordinatorV2Mock.fulfillRandomWords(1, raffle.address) // reverts if not fulfilled
+        //                 ).to.be.revertedWith("nonexistent request")
+        //             })
+        //         it("picks a winner, resets, and sends money", async () => {
+
+        //             const additionalEntrants = 3
+        //             const startingAccountIndex = 1
+
+        //             for (let i = startingIndex; i < startingIndex + additionalEntrances; i++) { // i = 2; i < 5; i=i+1
+        //             const accountConnectedRaffle = raffle.connect(accounts[i]) // Returns a new instance of the Raffle contract connected to player
+        //             await accountConnectedRaffle.enterRaffle({ value: raffleEntranceFee })
+        //         }
+
+        //         const startingTimeStamp = await raffle.getLastTimeStamp()
+
+        //         await new Promise(async(resolve,reject)=> {
+        //             raffle.once("WinnerPicked",()=> {
+
+        //             })
+        //         })
+
+                   
+
+                    
+
+        //             })
+
+                
+
+
+
+        //       })
+          
 
         describe("fulfillRandomWords", function () {
             beforeEach(async () => {
@@ -158,7 +187,7 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat-confi
           // All the assertions are done once the WinnerPicked event is fired
             it("picks a winner, resets, and sends money", async () => {
                 const additionalEntrances = 3 // to test
-                const startingIndex = 1
+                const startingIndex = 2
                 const accounts = await ethers.getSigners()
                 for (let i = startingIndex; i < startingIndex + additionalEntrances; i++) { // i = 2; i < 5; i=i+1
                     raffle = raffle.connect(accounts[i]) // Returns a new instance of the Raffle contract connected to player
@@ -168,7 +197,7 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat-confi
 
                 // This will be more important for our staging tests...
                 await new Promise(async (resolve, reject) => {
-                    raffle.once("WinnerPicked", async () => { // event listener for WinnerPicked
+                    raffle.once("WinerPicked", async () => { // event listener for WinnerPicked
                         console.log("WinnerPicked event fired!")
                         // assert throws an error if it fails, so we need to wrap
                         // it in a try/catch so that the promise returns event
